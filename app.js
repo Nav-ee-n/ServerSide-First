@@ -70,7 +70,22 @@ app.post('/addcourse',function(req,res){
     });
 })
 
+app.put('/update/:id',function(req,res){
+    const id=req.params.id;
+    courseTitle=req.body.courseTitle;
+    courseDescription=req.body.courseDescription;
+    courseDuration=req.body.courseDuration;
+    courseDat=req.body.courseDat;
+    courseVenue=req.body.courseVenue;
 
+    CourseData.findByIdAndUpdate({"_id":id},
+    {$set:{"courseTitle":courseTitle,
+"courseDescription":courseDescription,
+"courseDat":courseDat,
+"courseVenue":courseVenue,
+"courseDuration":courseDuration
+}}).then(function(){res.send("Updated")});
+})
 
 
 
