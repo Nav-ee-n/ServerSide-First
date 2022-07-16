@@ -87,6 +87,13 @@ app.put('/update/:id',function(req,res){
 }}).then(function(){res.send("Updated")});
 })
 
+app.delete('/delete/:id',function(req,res)
+{
+    const id=req.params.id;
+    CourseData.findByIdAndDelete(id,function()
+    {res.send("Deleted")})
+})
+
 
 
 
