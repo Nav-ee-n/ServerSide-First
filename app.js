@@ -1,7 +1,8 @@
 const express=require("express");
 const CourseData=require('./src/model/CourseData');
 const app= express();
-app.use(express.json())
+app.use(express.json());
+app.use(express.urlencoded({extented:true}));
 // courseList=[
 //     {
 //     "courseTitle":"React",
@@ -50,6 +51,28 @@ app.get('/getcourses',function(req,res){
         res.send(courses);
     })
 })
+
+app.post('/addcourse',function(req,res){
+
+    var item={
+        courseTitle:req.body.courseTitle,
+        courseDescription:req.body.courseDescription,
+        courseVenue:req.body.courseVenue,
+        courseDuration:req.body.courseDuration,
+        courseDat:req.body.courseDat
+    }
+    var course=CourseData(item);
+    course.save();
+
+    CourseData.find()
+    .then(function(course){
+        res.send(course);
+    });
+})
+
+
+
+
 
 
 app.listen(3000);
