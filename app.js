@@ -1,5 +1,6 @@
 const express=require("express");
 const app= express();
+app.use(express.json())
 courseList=[
     {
     "courseTitle":"React",
@@ -29,12 +30,16 @@ courseList=[
         "courseDat":"2022-07-06",
         "courseVenue":"PHYSICAL"
     }
-]
+];
 
 app.get('/getcourses',function(req,res){
     res.send(courseList);
-})
+});
 app.post('/addcourse',function(req,res){
-    
-})
+
+   console.log(req.body);
+   courseList.push(req.body);
+   res.status(200).send(courseList); 
+});
 app.listen(3000);
+console.log("Server Ready");
